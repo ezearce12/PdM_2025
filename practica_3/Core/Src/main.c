@@ -46,7 +46,7 @@
 		Utilizar la función delayWrite y una única variable tipo delay_t para cambiar el tiempo de encendido del led.
 		NOTA: los tiempos indicados son de encendido y el led debe trabajar con duty = 50%
 
-		Punto 3
+	Punto 3
 
 		Implementar la siguiente función auxiliar pública en API_delay.c
 
@@ -55,7 +55,6 @@
 		Esta función debe devolver una copia del valor del campo running de la estructura delay_t
 
 		Utilizar esta función en el código implementado para el punto dos para verificar que el delay no esté corriendo antes de cambiar su valor con delayWrite.
-
 
   *
   *
@@ -137,15 +136,17 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
+  //Definicion de tiempos del led encendido
   const uint32_t TIEMPOS[] = {500, 100, 100, 1000};
-    uint8_t cantTiempos = sizeof(TIEMPOS) / sizeof(TIEMPOS[0]);
-    uint8_t indice = 0;
 
-    delay_t delay;
+  uint8_t cantTiempos = sizeof(TIEMPOS) / sizeof(TIEMPOS[0]);
+  uint8_t indice = 0;
 
-    bool ledState = false;
+  delay_t delay;
+  bool ledState = false;
 
-    delayInit(&delay, TIEMPOS[indice]);
+  //Inicializacion del delay.
+  delayInit(&delay, TIEMPOS[indice]);
 
   /* USER CODE END 2 */
 
@@ -154,46 +155,24 @@ int main(void)
   while (1)
   {
 
+	if (delayRead(&delay)){
 
-//	  if(delayRead(&non_block_delay_1)){
-//		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-//	  }
+		ledState = !ledState;
+		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, ledState ? GPIO_PIN_SET : GPIO_PIN_RESET);
 
+		indice ++;
 
-		if (delayRead(&delay))
-		{
-			ledState = !ledState;
-			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, ledState ? GPIO_PIN_SET : GPIO_PIN_RESET);
-
-			indice ++;
-
-			if (indice >= cantTiempos) {
-				indice = 0;
-			}
-
-			if(delayIsRunning(&delay) == false){
-				delayWrite(&delay, TIEMPOS[indice]);
-			}
-
+		if (indice >= cantTiempos) {
+			indice = 0;
 		}
-//	  }
 
+		if(delayIsRunning(&delay) == false){
+			delayWrite(&delay, TIEMPOS[indice]);
+		}
 
-//	  		  if(!led_state){
-//	  			  cycle_count++;
-//	  			  if(cycle_count == time_cycles[actual_pattern]){
-//	  				  cycle_count=0;
-//	  				  if(actual_pattern==2){
-//	  					  actual_pattern=0;
-//	  				  }
-//	  				  else{
-//	  					  actual_pattern++;
-//	  				  }
-//	  				delayWrite(&non_block_delay_1,time_pattern_dutty[actual_pattern]);
-//	  			  }
-//	  		  }
-	  	  }
+	}
 
+  }
 
     /* USER CODE END WHILE */
 
@@ -266,37 +245,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
-//void delayInit( delay_t * delay, tick_t duration ){
-//
-//	delay->duration = duration;
-//	delay->running = false;
-//
-//}
-//
-//bool_t delayRead( delay_t * delay ){
-//
-//	if(!delay->running){
-//		delay->running = true;
-//		delay->startTime = HAL_GetTick();
-//		return false;
-//	}
-//	else{
-//		if((HAL_GetTick() - delay->startTime) >= delay->duration){
-//			delay->running = false;
-//			return true;
-//		}
-//		else{
-//			return false;
-//		}
-//	}
-//
-//}
-//
-//void delayWrite( delay_t * delay, tick_t duration ){
-//	delay->duration=duration;
-//}
-
 
 
 /* USER CODE END 4 */
