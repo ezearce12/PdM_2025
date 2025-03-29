@@ -19,7 +19,10 @@ BUTTON_DOWN,
 BUTTON_RAISING,
 } debounceState_t;
 
+//Funcion que se llama cuando se presiona el pulsador
 static void buttonPressed(void);
+
+//Funcion que se llama cuando se suelta el pulsador
 static void buttonReleased(void);
 
 //Maqujina de estado
@@ -34,10 +37,16 @@ static bool pushed = false;
 //Tiempo de control de rebote
 const uint8_t time_ms = 40;
 
+//Se inicializa la maquina de estado en el estado inicial
 void debounceFSM_init(){
 	FSM = BUTTON_UP;
 }
 
+/**
+ * @brief Actualiza el estado de la maquina de estados para el rebote del pulsador.
+ *
+ * Evalua el estado del pulsador y maneja los cambios entre estados con un tiempo de rebote.
+ */
 void debounceFSM_update(){
 
 	switch(FSM){
@@ -52,12 +61,11 @@ void debounceFSM_update(){
 
 	case BUTTON_FALLING:
 
-		pushed = true;
-
 		if(delayRead(&delay)){
 			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET){
 				FSM = BUTTON_DOWN;
-				buttonPressed();
+				//Se registra que el pulsador es presionado.
+				pushed = true;
 			}
 			else{
 				FSM = BUTTON_UP;
@@ -76,7 +84,6 @@ void debounceFSM_update(){
 		if(delayRead(&delay)){
 			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_SET){
 				FSM = BUTTON_UP;
-				buttonReleased();
 			}
 			else{
 				FSM = BUTTON_DOWN;
@@ -90,18 +97,35 @@ void debounceFSM_update(){
 
 }
 
-void buttonPressed(){
+/**
+ * @brief Funcion a ejecutar cuando se presiona el pulsador.
+ *
+ * Esta funcion enciende el LED conectado al puerto LD2.
+ */
+static void buttonPressed(){
 
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
 
 }
 
-void buttonReleased(){
+/**
+ * @brief Funcion a ejecutar cuando se suelta el pulsador.
+ *
+ * Esta funcion apaga el LED conectado al puerto LD2.
+ */
+static void buttonReleased(){
 
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
 }
 
+/**
+ * @brief Verifica si el boton fue presionado.
+ *
+ * @return true si se detecto una pulsacion, false en caso contrario.
+ *
+ * Devuelve true solo una vez por pulsación detectada. Y cuando se lee la variable se torna a false.
+ */
 bool_t readKey(){
 
 	if(pushed){
