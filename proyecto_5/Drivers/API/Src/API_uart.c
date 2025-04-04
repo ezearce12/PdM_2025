@@ -78,7 +78,7 @@ void uartSendString(uint8_t * pstring){
 	//strlen devuelve el tamaño de un string
 	uint16_t string_size = strlen((char *)pstring);
 
-	if(string_size != 0 && string_size < MAX_TX_BUFFER){
+	if(string_size > 0 && string_size < MAX_TX_BUFFER){
 		if(HAL_UART_Transmit(&huart2,pstring,string_size,HAL_MAX_DELAY) != HAL_OK) {
 			  Error_Handler();
 		}
@@ -93,7 +93,7 @@ void uartSendStringSize(uint8_t * pstring, uint16_t size){
 
 	if(pstring == NULL) return;
 
-	if(size != 0 && size < MAX_TX_BUFFER){
+	if(size > 0 && size < MAX_TX_BUFFER){
 		if(HAL_UART_Transmit(&huart2,pstring,size,HAL_MAX_DELAY) != HAL_OK) {
 			  Error_Handler();
 		}
@@ -107,6 +107,10 @@ void uartSendStringSize(uint8_t * pstring, uint16_t size){
  * Y el tammaño del buffer.
  */
 void uartReceiveStringSize(uint8_t * pstring, uint16_t size){
+
+	if(pstring == NULL) return;
+
+	if(size <= 0 || size > MAX_RX_BUFFER ) return;
 
 	if(HAL_UART_Receive(&huart2, pstring, size, HAL_MAX_DELAY) != HAL_OK) {
 		  Error_Handler();

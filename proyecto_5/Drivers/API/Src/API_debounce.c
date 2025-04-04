@@ -9,15 +9,19 @@
 #include "API_debounce.h"
 #include "stdlib.h"
 #include "stm32f4xx_hal.h"
+#include "API_uart.h"
 
-
+char UP_MSG[] = "Flanco Ascendente\n";
+char DOWN_MSG[] = "Flanco Descendente\n";
 
 typedef enum{
-BUTTON_UP,
-BUTTON_FALLING,
-BUTTON_DOWN,
-BUTTON_RAISING,
+	BUTTON_UP,
+	BUTTON_FALLING,
+	BUTTON_DOWN,
+	BUTTON_RAISING,
 } debounceState_t;
+
+
 
 //Funcion que se llama cuando se presiona el pulsador
 static void buttonPressed(void);
@@ -65,6 +69,7 @@ void debounceFSM_update(){
 			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET){
 				FSM = BUTTON_DOWN;
 				//Se registra que el pulsador es presionado.
+				buttonReleased();
 				pushed = true;
 			}
 			else{
@@ -84,6 +89,8 @@ void debounceFSM_update(){
 		if(delayRead(&delay)){
 			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_SET){
 				FSM = BUTTON_UP;
+				buttonPressed();
+
 			}
 			else{
 				FSM = BUTTON_DOWN;
@@ -100,24 +107,22 @@ void debounceFSM_update(){
 /**
  * @brief Funcion a ejecutar cuando se presiona el pulsador.
  *
- * Esta funcion enciende el LED conectado al puerto LD2.
  */
-//static void buttonPressed(){
-//
-//	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-//
-//}
+static void buttonPressed(){
+
+	uartSendString((uint8_t*)UP_MSG);
+
+}
 
 /**
  * @brief Funcion a ejecutar cuando se suelta el pulsador.
  *
  * Esta funcion apaga el LED conectado al puerto LD2.
  */
-//static void buttonReleased(){
-//
-//	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-//
-//}
+static void buttonReleased(){
+
+	uartSendString((uint8_t*)DOWN_MSG);
+}
 
 /**
  * @brief Verifica si el boton fue presionado.
@@ -137,3 +142,4 @@ bool_t readKey(){
 	}
 
 }
+
