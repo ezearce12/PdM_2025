@@ -16,6 +16,8 @@ UART_HandleTypeDef huart2;
 const uint16_t MAX_TX_BUFFER = 512;
 const uint16_t MAX_RX_BUFFER = 512;
 
+const char clr_terminal[] = "\x1b[2J";
+
 
 /**	Inicializa la UART Numero 2 y envia Un primer mensaje con las configuraciones propias.
  *
@@ -34,13 +36,13 @@ bool uartInit(void){
 	huart2.Init.OverSampling = UART_OVERSAMPLING_16;
 
 	sprintf(buffer,
-	        "BaudRate: %lu\n"
-	        "WordLength: %s\n"
-	        "StopBits: %s\n"
-	        "Parity: %s\n"
-	        "Mode: %s\n"
-	        "Flow Control: %s\n"
-	        "Oversampling: %lu\n",
+	        "BaudRate: %lu\n\r"
+	        "WordLength: %s\n\r"
+	        "StopBits: %s\n\r"
+	        "Parity: %s\n\r"
+	        "Mode: %s\n\r"
+	        "Flow Control: %s\n\r"
+	        "Oversampling: %lu\n\r",
 	        huart2.Init.BaudRate,
 	        (huart2.Init.WordLength == UART_WORDLENGTH_8B) ? "8 bits" : "9 bits",
 	        (huart2.Init.StopBits == UART_STOPBITS_1) ? "1 bit" : "2 bits",
@@ -112,8 +114,27 @@ void uartReceiveStringSize(uint8_t * pstring, uint16_t size){
 
 	if(size <= 0 || size > MAX_RX_BUFFER ) return;
 
+
+
 	if(HAL_UART_Receive(&huart2, pstring, size, HAL_MAX_DELAY) != HAL_OK) {
-		  Error_Handler();
+		Error_Handler();
 	}
 
+
+
+
 }
+/*
+ * Envia el codigo ANSI
+ */
+void uartClearTerminal(void){
+
+	uint16_t string_size = strlen(clr_terminal);
+
+	string_size++;
+
+	if(HAL_UART_Transmit(&huart2, (uint8_t *)clr_terminal, string_size, HAL_MAX_DELAY) != HAL_OK) {
+		  Error_Handler();
+	}
+}
+

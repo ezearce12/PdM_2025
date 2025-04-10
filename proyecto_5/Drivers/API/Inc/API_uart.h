@@ -18,6 +18,7 @@ bool uartInit();
 void uartSendString(uint8_t * pstring);
 void uartSendStringSize(uint8_t * pstring, uint16_t size);
 void uartReceiveStringSize(uint8_t * pstring, uint16_t size);
-
+void uartClearTerminal(void);
+//void uartReceiveLine(uint8_t *pstring, uint16_t max_size);
 
 #endif /* API_INC_API_UART_H_ */

@@ -41,7 +41,7 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
+#include <string.h>
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/

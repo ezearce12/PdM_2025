@@ -1,4 +1,0 @@
-../Drivers/API/src/API_delay.c:13:6:delayInit	1
-../Drivers/API/src/API_delay.c:20:8:delayRead	3
-../Drivers/API/src/API_delay.c:39:6:delayWrite	1
-../Drivers/API/src/API_delay.c:43:8:delayIsRunning	2
