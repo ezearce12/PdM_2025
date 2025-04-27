@@ -1,8 +1,11 @@
-/*
- * TF-LC02.h
+/**
+ * @file TF-LC02.h
+ * @brief Prototipos de funciones y definiciones para la interfaz con el sensor TF-LC02.
  *
- *  Created on: Apr 2, 2025
- *      Author: Eze
+ * Este archivo contiene las declaraciones de las funciones para la configuración,
+ * medición, y comunicación con el sensor TF-LC02, así como los tipos y las
+ * estructuras necesarias para interactuar con el sensor.
+ *
  */
 
  #ifndef API_INC_TF_LC02_H_

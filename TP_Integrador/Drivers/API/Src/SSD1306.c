@@ -1,8 +1,21 @@
-/*
- * SSD1306.c
+/**
+ * @file SSD1306.c
+ * @brief Implementación de funciones para el control de pantallas OLED basadas en el controlador SSD1306.
  *
- *  Created on: Apr 15, 2025
- *      Author: Eze
+ * Este archivo contiene las funciones necesarias para inicializar, configurar y controlar
+ * pantallas OLED que utilizan el controlador SSD1306 mediante comunicación I2C.
+ *
+ * @details
+ * Funciones principales:
+ * - Inicialización del display.
+ * - Envío de comandos y datos.
+ * - Manejo de buffer gráfico.
+ * - Dibujado de caracteres y gráficos simples.
+ *
+ * @note
+ * Esta implementación está adaptada para STM32 utilizando HAL. Se puede portar a otros
+ * microcontroladores modificando las funciones de bajo nivel de comunicación.
+ *
  */
 
  #include "../../Drivers/API/Inc/SSD1306.h"

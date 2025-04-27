@@ -1,8 +1,9 @@
-/*
- * TF-LC02_Port.h
+/**
+ * @file TF-LC02_Port.h
+ * @brief Interfaz de bajo nivel para la comunicación UART con el sensor TF-LC02.
  *
- *  Created on: Apr 2, 2025
- *      Author: Eze
+ * Este archivo declara las funciones necesarias para transmitir y recibir datos,
+ * en modo bloqueante e interrupción, utilizando UART.
  */
 
  #ifndef API_INC_TF_LC02_PORT_H_

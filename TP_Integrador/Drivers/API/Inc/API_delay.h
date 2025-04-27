@@ -1,8 +1,10 @@
-/*
- * API_delay.h
+/**
+ * @file API_delay.h
  *
- *  Created on: Mar 20, 2025
- *      Author: Eze Arce
+ * @brief Módulo de temporizadores no bloqueantes.
+ *
+ * Este encabezado define las estructuras y funciones necesarias para
+ * trabajar con temporizadores utilizando la función HAL_GetTick().
  */
 
  #ifndef API_API_DELAY_H_

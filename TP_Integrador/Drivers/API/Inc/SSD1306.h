@@ -1,8 +1,10 @@
-/*
- * SSD1306.h
+/**
+ * @file SSD1306.h
+ * @brief Interfaz para el control de un display OLED SSD1306 vía I2C.
  *
- *  Created on: Apr 15, 2025
- *      Author: Eze
+ * Proporciona funciones para inicialización, control de encendido, limpieza,
+ * y escritura de caracteres y strings en pantalla.
+ *
  */
 
  #ifndef API_INC_SSD1306_H_

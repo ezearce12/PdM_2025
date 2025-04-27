@@ -1,8 +1,9 @@
-/*
- * TF-LC02_Port.c
+/**
+ * @file TF-LC02_Port.c
+ * @brief Implementación de funciones de bajo nivel para la comunicación UART con el sensor TF-LC02.
  *
- *  Created on: Apr 2, 2025
- *      Author: Eze Arce
+ * Este archivo proporciona las funciones de transmisión y recepción de datos,
+ * tanto en modo bloqueante como por interrupción, además del manejo básico de errores.
  */
 
 

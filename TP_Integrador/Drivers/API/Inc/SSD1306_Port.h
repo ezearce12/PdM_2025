@@ -1,8 +1,6 @@
-/*
- * SSD1306_Port.h
+/**
+ * @file SSD1306_Port.h
  *
- *  Created on: Apr 19, 2025
- *      Author: Eze
  */
 
  #ifndef API_INC_SSD1306_PORT_H_

@@ -1,5 +1,5 @@
-/*
- * API_debounce.h
+/**
+ * @file API_debounce.h
  *
  *  Created on: Mar 28, 2025
  *      Author: Eze Arce

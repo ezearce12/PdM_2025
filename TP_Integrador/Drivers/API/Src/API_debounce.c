@@ -1,9 +1,10 @@
-/*
- * API_debounce.c
+/**
+ * @file API_debounce.c
  *
- *  Created on: Mar 28, 2025
- *      Author: Eze Arce
+ * @brief Implementación de una máquina de estados para el control de rebotes de un pulsador.
+ *
  */
+
 
  #include "main.h"
  #include "../../Drivers/API/Inc/API_debounce.h"

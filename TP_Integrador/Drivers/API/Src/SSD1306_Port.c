@@ -1,8 +1,21 @@
-/*
- * SSD1306_Port.c
+/**
+ * @file SSD1306_Port.c
+ * @brief Implementación de funciones de bajo nivel para la comunicación con la pantalla SSD1306.
  *
- *  Created on: Apr 19, 2025
- *      Author: Eze
+ * Este archivo proporciona una capa de abstracción para la transmisión de comandos y datos
+ * hacia la pantalla OLED SSD1306 a través del bus I2C u otros métodos de comunicación,
+ * dependiendo de la plataforma utilizada.
+ *
+ * @details
+ * Funciones principales:
+ * - Enviar comandos individuales al display.
+ * - Enviar bloques de datos (buffer gráfico).
+ * - Inicializar el hardware de comunicación necesario.
+ *
+ * @note
+ * Estas funciones deben ser implementadas para cada plataforma o microcontrolador
+ * específico que utilice el driver de pantalla SSD1306.
+ *
  */
 
  #include "../../Drivers/API/Inc/SSD1306_Port.h"

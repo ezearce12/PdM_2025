@@ -1,8 +1,9 @@
-/*
- * API_delay.c
+/**
+ * @file API_delay.c
+ * @brief Implementación de temporizadores no bloqueantes.
  *
- *  Created on: Mar 20, 2025
- *      Author: Eze Arce
+ * Este módulo permite inicializar, leer y configurar temporizadores
+ * de manera no bloqueante utilizando la función HAL_GetTick().
  */
 
  #include "../../Drivers/API/Inc/API_delay.h"	/**< Incluye el encabezado correspondiente. */
